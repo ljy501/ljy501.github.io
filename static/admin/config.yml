@@ -1,9 +1,8 @@
 backend:
-  name: github
-  repo: ljy501/ljy501.github.io
+  name: git-gateway
   branch: main
-  auth_type: implicit
-  app_id: Ov23liOtNNyxrAAViIUs
+
+site_domain: elegant-fox-7a41b7.netlify.app
 
 media_folder: "static/images"
 public_folder: "/images"
