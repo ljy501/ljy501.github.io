@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <rect width="800" height="400" fill="#f6f8fb"/>
+  <text x="400" y="45" font-size="26" font-weight="bold" fill="#1f2329" text-anchor="middle">个人博客技术栈</text>
+  <rect x="60" y="90" width="180" height="110" rx="12" fill="#3b82f6"/>
+  <text x="150" y="145" font-size="22" fill="#ffffff" text-anchor="middle">Hugo</text>
+  <text x="150" y="172" font-size="14" fill="#dbeafe" text-anchor="middle">静态站点生成</text>
+  <rect x="310" y="90" width="180" height="110" rx="12" fill="#6366f1"/>
+  <text x="400" y="145" font-size="22" fill="#ffffff" text-anchor="middle">PaperMod</text>
+  <text x="400" y="172" font-size="14" fill="#e0e7ff" text-anchor="middle">极简主题</text>
+  <rect x="560" y="90" width="180" height="110" rx="12" fill="#22c55e"/>
+  <text x="650" y="145" font-size="22" fill="#ffffff" text-anchor="middle">GitHub</text>
+  <text x="650" y="172" font-size="14" fill="#dcfce7" text-anchor="middle">Pages + Actions</text>
+  <rect x="185" y="260" width="430" height="70" rx="35" fill="#e2e8f0"/>
+  <text x="400" y="305" font-size="20" fill="#334155" text-anchor="middle">Markdown 写作 → 自动构建 → 免费上线</text>
+</svg>

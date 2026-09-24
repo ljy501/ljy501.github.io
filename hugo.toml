@@ -1,0 +1,39 @@
+baseURL = 'https://yourname.github.io/'   # 部署前替换为你的 GitHub Pages 地址
+locale = 'zh-CN'
+title = "Liu Junyu's Blog"
+theme = 'PaperMod'
+enableRobotsTXT = true
+
+[params]
+  env = 'production'
+  author = 'Liu Junyu'
+  description = 'Personal blog of Liu Junyu — network engineering student, exploring data science, cybersecurity and systems.'
+  ShowReadingTime = true
+  ShowWordCount = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  comments = false
+
+[menu]
+  [[menu.main]]
+    identifier = 'home'
+    name = 'Home'
+    url = '/'
+    weight = 1
+  [[menu.main]]
+    identifier = 'about'
+    name = 'About'
+    url = '/about/'
+    weight = 2
+  [[menu.main]]
+    identifier = 'blog'
+    name = 'Blog'
+    url = '/blog/'
+    weight = 3
+  [[menu.main]]
+    identifier = 'contact'
+    name = 'Contact'
+    url = '/contact/'
+    weight = 4
