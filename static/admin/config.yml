@@ -2,7 +2,8 @@ backend:
   name: git-gateway
   branch: main
 
-site_domain: elegant-fox-7a41b7.netlify.app
+identity_url: https://elegant-fox-7a41b7.netlify.app/.netlify/identity
+gateway_url: https://elegant-fox-7a41b7.netlify.app/.netlify/git
 
 media_folder: "static/images"
 public_folder: "/images"
