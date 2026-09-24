@@ -1,4 +1,4 @@
-baseURL = 'https://yourname.github.io/'   # 部署前替换为你的 GitHub Pages 地址
+baseURL = 'https://ljy501.github.io/'
 locale = 'zh-CN'
 title = "Liu Junyu's Blog"
 theme = 'PaperMod'
