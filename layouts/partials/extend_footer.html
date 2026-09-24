@@ -1,0 +1,13 @@
+{{- /* Netlify Identity 邮件 token 自动跳转后台处理 */ -}}
+<script>
+(function () {
+  var tokens = ['confirmation_token', 'password_reset_token', 'invite_token', 'recovery_token', 'token'];
+  var params = new URLSearchParams(window.location.search);
+  for (var i = 0; i < tokens.length; i++) {
+    if (params.has(tokens[i])) {
+      window.location.replace('/admin/?' + tokens[i] + '=' + encodeURIComponent(params.get(tokens[i])));
+      return;
+    }
+  }
+})();
+</script>
