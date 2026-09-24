@@ -1,0 +1,15 @@
+[build]
+  command = "npx --yes hugo-extended@0.148.2 --gc --minify"
+  publish = "public"
+
+[build.environment]
+  HUGO_VERSION = "0.148.2"
+  HUGO_ENV = "production"
+
+[[headers]]
+  for = "/*"
+
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
