@@ -1,0 +1,39 @@
+backend:
+  name: github
+  repo: ljy501/ljy501.github.io
+  branch: main
+  auth_type: implicit
+  app_id: Ov23liOtNNyxrAAViIUs
+
+media_folder: "static/images"
+public_folder: "/images"
+
+locale: "zh_Hans"
+
+collections:
+  - name: "blog"
+    label: "博客文章"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "发布日期", name: "date", widget: "datetime" }
+      - { label: "分类", name: "categories", widget: "list", default: ["学习随笔"] }
+      - { label: "标签", name: "tags", widget: "list" }
+      - { label: "正文", name: "body", widget: "markdown" }
+  - name: "pages"
+    label: "页面"
+    files:
+      - file: "content/about.md"
+        label: "About 页面"
+        name: "about"
+        fields:
+          - { label: "标题", name: "title", widget: "string" }
+          - { label: "正文", name: "body", widget: "markdown" }
+      - file: "content/contact.md"
+        label: "Contact 页面"
+        name: "contact"
+        fields:
+          - { label: "标题", name: "title", widget: "string" }
+          - { label: "正文", name: "body", widget: "markdown" }

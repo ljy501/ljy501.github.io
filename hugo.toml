@@ -7,7 +7,7 @@ enableRobotsTXT = true
 [params]
   env = 'production'
   author = 'Liu Junyu'
-  description = 'Personal blog of Liu Junyu — network engineering student, exploring data science, cybersecurity and systems.'
+  description = '刘峻宇个人博客测试'
   ShowReadingTime = true
   ShowWordCount = true
   ShowShareButtons = false
