@@ -1,0 +1,7 @@
+{
+  "name": "elegant-fox-hugo-site",
+  "private": true,
+  "dependencies": {
+    "hugo-extended": "0.148.2"
+  }
+}
