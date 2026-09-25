@@ -6,6 +6,15 @@
   <title>Content Manager</title>
 </head>
 <body>
+  <!-- 身份组件：拦截邮箱确认/重置密码链接里的 token，弹出对应表单；显式指定 Netlify 端点（站点托管在 GitHub Pages，需指定真实身份服务地址） -->
+  <script>
+    window.netlifyIdentity = {
+      init: {
+        url: 'https://elegant-fox-7a41b7.netlify.app/.netlify/identity'
+      }
+    };
+  </script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <!-- Decap CMS 管理后台入口（认证端点已在 config.yml 中显式指定） -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
