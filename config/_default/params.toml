@@ -1,0 +1,51 @@
+description = '刘峻宇的个人博客 — Network Engineering · Data · Security · Systems'
+mainSections = ["post"]
+rssFullContent = true
+
+[footer]
+    since = 2026
+    customText = "Built with Hugo & Stack"
+
+[dateFormat]
+    published = ":date_full"
+    lastUpdated = ":date_full"
+
+[sidebar]
+    compact = false
+    avatar = ""
+    subtitle = "Network Engineering Undergraduate<br>Data · Security · Systems"
+
+[article]
+    headingAnchor = false
+    math = false
+    toc = true
+    readingTime = true
+
+    [article.license]
+        enabled = false
+
+    [article.list]
+        showTags = true
+
+[widgets]
+    homepage = [
+        { type = "search" },
+        { type = "categories", params = { title = "分类", limit = 10 } },
+        { type = "tag-cloud", params = { title = "标签" } },
+        { type = "archives", params = { title = "归档" } },
+    ]
+    page = [
+        { type = "toc", params = { title = "目录" } },
+    ]
+
+[colorScheme]
+    toggle = true
+    default = "auto"
+
+[comments]
+    enabled = false
+
+[imageProcessing]
+    autoOrient = false
+    [imageProcessing.thumbnail]
+        enabled = true

@@ -1,0 +1,17 @@
+/* ========== 自定义样式：蓝色渐变背景 ========== */
+
+/* 浅色模式：柔和蓝白渐变 */
+html[data-scheme="light"] body {
+    background: linear-gradient(160deg, #f6f9ff 0%, #e9f1fd 45%, #dce8fb 100%) fixed;
+}
+
+/* 深色模式：深蓝科技感渐变 */
+html[data-scheme="dark"] body {
+    background: linear-gradient(160deg, #0a0f1f 0%, #0d1530 45%, #131c3d 100%) fixed;
+}
+
+/* 文章卡片在渐变背景上的柔和投影 */
+html[data-scheme="light"] .article-list .article-card,
+html[data-scheme="light"] .article-list .card-variant {
+    box-shadow: 0 4px 18px rgba(31, 64, 130, 0.08);
+}

@@ -1,20 +1,9 @@
 baseURL = 'https://ljy501.github.io/'
 locale = 'zh-CN'
 title = "Liu Junyu's Blog"
-theme = 'PaperMod'
+theme = 'stack'
 enableRobotsTXT = true
-
-[params]
-  env = 'production'
-  author = 'Liu Junyu'
-  description = '刘峻宇个人博客测试'
-  ShowReadingTime = true
-  ShowWordCount = true
-  ShowShareButtons = false
-  ShowPostNavLinks = true
-  ShowBreadCrumbs = true
-  ShowCodeCopyButtons = true
-  comments = false
+paginate = 6
 
 [menu]
   [[menu.main]]
@@ -28,9 +17,9 @@ enableRobotsTXT = true
     url = '/about/'
     weight = 2
   [[menu.main]]
-    identifier = 'blog'
+    identifier = 'post'
     name = 'Blog'
-    url = '/blog/'
+    url = '/post/'
     weight = 3
   [[menu.main]]
     identifier = 'contact'

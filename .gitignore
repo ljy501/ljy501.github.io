@@ -6,3 +6,6 @@ resources/
 # 系统文件
 Thumbs.db
 .DS_Store
+
+# Hugo 生成的 IDE 辅助文件
+assets/jsconfig.json

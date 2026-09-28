@@ -13,7 +13,7 @@ locale: "zh_Hans"
 collections:
   - name: "blog"
     label: "博客文章"
-    folder: "content/blog"
+    folder: "content/post"
     create: true
     slug: "{{slug}}"
     fields:
