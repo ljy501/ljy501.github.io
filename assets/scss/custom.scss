@@ -15,3 +15,165 @@ html[data-scheme="light"] .article-list .article-card,
 html[data-scheme="light"] .article-list .card-variant {
     box-shadow: 0 4px 18px rgba(31, 64, 130, 0.08);
 }
+
+/* ========== 首页个人门户区 ========== */
+.home-profile {
+    padding: 8px 0 20px;
+}
+
+/* ========== 首页 Hero（个人主页头部） ========== */
+.home-hero {
+    text-align: center;
+    padding: 36px 16px 28px;
+}
+
+.home-avatar {
+    width: 92px;
+    height: 92px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #2f6fed 0%, #5b8cff 100%);
+    box-shadow: 0 8px 24px rgba(47, 111, 237, 0.35);
+    letter-spacing: 1px;
+}
+
+html[data-scheme="dark"] .home-avatar {
+    box-shadow: 0 8px 24px rgba(91, 140, 255, 0.30);
+}
+
+.home-name {
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin: 0 0 10px;
+    letter-spacing: 0.5px;
+}
+
+.home-tagline {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #3a5fc4;
+    margin: 0 0 22px;
+}
+
+html[data-scheme="dark"] .home-tagline {
+    color: #8fb0ff;
+}
+
+.home-bio {
+    max-width: 640px;
+    margin: 0 auto 14px;
+    line-height: 1.75;
+    text-align: center;
+}
+
+.home-bio-en {
+    color: var(--card-text-color-secondary);
+    font-size: 0.95rem;
+}
+
+.home-cta {
+    margin-top: 26px;
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.home-cta .btn {
+    display: inline-block;
+    padding: 10px 26px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.home-cta .btn:hover {
+    transform: translateY(-2px);
+}
+
+.home-cta .btn-primary {
+    color: #fff;
+    background: linear-gradient(135deg, #2f6fed 0%, #5b8cff 100%);
+    box-shadow: 0 6px 18px rgba(47, 111, 237, 0.3);
+}
+
+.home-cta .btn-ghost {
+    color: var(--card-text-color);
+    border: 1.5px solid rgba(47, 111, 237, 0.45);
+    background: transparent;
+}
+
+html[data-scheme="dark"] .home-cta .btn-ghost {
+    border-color: rgba(139, 176, 255, 0.45);
+}
+
+/* 技能标签化 */
+.home-profile .skill-tags {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.home-profile .skill-tags li {
+    background: rgba(49, 99, 202, 0.10);
+    border: 1px solid rgba(49, 99, 202, 0.18);
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: 0.9rem;
+}
+
+html[data-scheme="dark"] .home-profile .skill-tags li {
+    background: rgba(99, 145, 255, 0.12);
+    border-color: rgba(99, 145, 255, 0.25);
+}
+
+/* 精选项目列表：常规行 */
+.home-profile .project-list {
+    list-style: none;
+    padding-left: 0;
+    display: block;
+}
+
+.home-profile .project-list li {
+    display: block;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(49, 99, 202, 0.12);
+}
+
+html[data-scheme="dark"] .home-profile .project-list li {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(99, 145, 255, 0.18);
+}
+
+/* ========== 栏目介绍区（Blog 等列表页顶部） ========== */
+.section-intro {
+    margin: 18px 0 8px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(49, 99, 202, 0.12);
+    font-size: 0.95rem;
+}
+
+html[data-scheme="dark"] .section-intro {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(99, 145, 255, 0.18);
+}
+
+.section-intro p {
+    margin: 0;
+}
+

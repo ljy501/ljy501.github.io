@@ -1,10 +1,9 @@
-description = '刘峻宇的个人博客 — Network Engineering · Data · Security · Systems'
+description = '刘峻宇的个人博客 — 个人作品集：项目、学习与实践'
 mainSections = ["post"]
 rssFullContent = true
 
 [footer]
     since = 2026
-    customText = "Built with Hugo & Stack"
 
 [dateFormat]
     published = ":date_full"
@@ -13,7 +12,7 @@ rssFullContent = true
 [sidebar]
     compact = false
     avatar = ""
-    subtitle = "Network Engineering Undergraduate<br>Data · Security · Systems"
+    subtitle = ""
 
 [article]
     headingAnchor = false

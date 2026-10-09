@@ -1,0 +1,11 @@
+{{ define "main" }}
+    {{ if .Content }}
+        <section class="home-profile">
+            {{ .Content }}
+        </section>
+    {{ end }}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ end }}
