@@ -40,7 +40,7 @@
 
     <!-- 顶部导航栏 Top Navbar -->
     <nav class="sticky top-0 z-50 border-b border-slate-200/70 bg-[#faf9f7]/85 backdrop-blur">
-        <div class="mx-auto flex max-w-3xl items-center justify-between px-5 py-4">
+        <div class="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
             <a href="/" class="flex items-center gap-2.5 font-bold tracking-tight text-slate-900">
                 <span class="grid h-8 w-8 place-items-center rounded-lg bg-techblue-deep text-[13px] font-black text-white">LJ</span>
                 Liu Junyu's Blog
@@ -57,66 +57,145 @@
         </div>
     </nav>
 
-    <!-- 主体内容 Hero -->
-    <main class="mx-auto max-w-3xl px-5 pb-28 pt-16 sm:pt-20">
+    <!-- 两栏主体 Two-column Layout -->
+    <main class="mx-auto max-w-5xl px-5 pb-24 pt-10 sm:pt-14">
 
-        <!-- 像素风头像 + 呼吸灯 -->
-        <div class="mb-9 flex justify-center">
-            <div class="avatar-breathe rounded-2xl bg-white p-3 ring-1 ring-slate-200/80">
-                <svg viewBox="0 0 16 16" width="112" height="112" style="image-rendering: pixelated;" role="img" aria-label="Liu Junyu pixel avatar">
-                    <rect x="0" y="0" width="16" height="16" fill="#1e3a8a"/>
-                    <!-- 背景光点 -->
-                    <rect x="2" y="2" width="1" height="1" fill="#3b82f6" opacity="0.5"/>
-                    <rect x="13" y="3" width="1" height="1" fill="#3b82f6" opacity="0.4"/>
-                    <rect x="1" y="12" width="1" height="1" fill="#3b82f6" opacity="0.35"/>
-                    <rect x="13" y="11" width="1" height="1" fill="#93c5fd" opacity="0.5"/>
-                    <!-- L：竖 x=3 y=4-10；顶横 x=4,5 y=4；底横 x=4,5 y=10 -->
-                    <rect x="3" y="4" width="1" height="7" fill="#93c5fd"/>
-                    <rect x="4" y="4" width="2" height="1" fill="#93c5fd"/>
-                    <rect x="4" y="10" width="2" height="1" fill="#93c5fd"/>
-                    <!-- J：顶横 x=9-11 y=4；竖 x=11 y=5-8；勾 x=10 y=9；底横 x=9,10 y=10 -->
-                    <rect x="9" y="4" width="3" height="1" fill="#93c5fd"/>
-                    <rect x="11" y="5" width="1" height="4" fill="#93c5fd"/>
-                    <rect x="10" y="9" width="1" height="1" fill="#93c5fd"/>
-                    <rect x="9" y="10" width="2" height="1" fill="#93c5fd"/>
-                    <!-- 高光像素 -->
-                    <rect x="3" y="4" width="1" height="1" fill="#bfdbfe"/>
-                    <rect x="9" y="4" width="1" height="1" fill="#bfdbfe"/>
-                </svg>
+        <div class="grid gap-10 lg:grid-cols-3">
+
+            <!-- ============ 左栏：个人卡（1/3，Sticky） ============ -->
+            <aside class="lg:col-span-1">
+                <div class="rounded-2xl border border-slate-200/80 bg-white p-7 shadow-sm lg:sticky lg:top-24">
+
+                    <!-- 像素头像 + 呼吸灯 -->
+                    <div class="flex justify-center">
+                        <div class="avatar-breathe rounded-2xl bg-white p-3 ring-1 ring-slate-200/80">
+                            <svg viewBox="0 0 16 16" width="96" height="96" style="image-rendering: pixelated;" role="img" aria-label="Liu Junyu pixel avatar">
+                                <rect x="0" y="0" width="16" height="16" fill="#1e3a8a"/>
+                                <rect x="2" y="2" width="1" height="1" fill="#3b82f6" opacity="0.5"/>
+                                <rect x="13" y="3" width="1" height="1" fill="#3b82f6" opacity="0.4"/>
+                                <rect x="1" y="12" width="1" height="1" fill="#3b82f6" opacity="0.35"/>
+                                <rect x="13" y="11" width="1" height="1" fill="#93c5fd" opacity="0.5"/>
+                                <rect x="3" y="4" width="1" height="7" fill="#93c5fd"/>
+                                <rect x="4" y="4" width="2" height="1" fill="#93c5fd"/>
+                                <rect x="4" y="10" width="2" height="1" fill="#93c5fd"/>
+                                <rect x="9" y="4" width="3" height="1" fill="#93c5fd"/>
+                                <rect x="11" y="5" width="1" height="4" fill="#93c5fd"/>
+                                <rect x="10" y="9" width="1" height="1" fill="#93c5fd"/>
+                                <rect x="9" y="10" width="2" height="1" fill="#93c5fd"/>
+                                <rect x="3" y="4" width="1" height="1" fill="#bfdbfe"/>
+                                <rect x="9" y="4" width="1" height="1" fill="#bfdbfe"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- 姓名 -->
+                    <h1 class="mt-6 text-center text-2xl font-bold tracking-tight text-slate-900">
+                        刘峻宇 <span class="font-normal text-slate-300">·</span> <span class="text-techblue-deep">Liu Junyu</span>
+                    </h1>
+
+                    <!-- 简短介绍 -->
+                    <p class="mt-4 text-center text-sm leading-relaxed text-slate-600">Network Engineering graduate · GPU infrastructure · eBPF &amp; RDMA</p>
+                    <p class="mt-2 text-center text-[13px] leading-relaxed text-slate-400">网络工程本科 · 专注 GPU 算力基础设施与网络系统 · 个人作品集</p>
+
+                    <!-- 技术标签 Pills -->
+                    <div class="mt-6 flex flex-wrap justify-center gap-2">
+                        <span class="rounded-full bg-slate-100 px-3 py-1 text-[12px] font-medium text-slate-600 ring-1 ring-slate-200/70">Network Engineering</span>
+                        <span class="rounded-full bg-slate-100 px-3 py-1 text-[12px] font-medium text-slate-600 ring-1 ring-slate-200/70">GPU Infrastructure</span>
+                        <span class="rounded-full bg-slate-100 px-3 py-1 text-[12px] font-medium text-slate-600 ring-1 ring-slate-200/70">Networking</span>
+                        <span class="rounded-full bg-slate-100 px-3 py-1 text-[12px] font-medium text-slate-600 ring-1 ring-slate-200/70">Systems</span>
+                    </div>
+
+                    <!-- 社交链接 -->
+                    <div class="mt-7 flex justify-center gap-3">
+                        <a href="https://github.com/ljy501" target="_blank" rel="noopener"
+                           class="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-techblue-deep/40 hover:shadow-md hover:text-techblue-deep">
+                            <svg class="h-4 w-4" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                            GitHub
+                        </a>
+                        <a href="mailto:1539256110@qq.com"
+                           class="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-techblue-deep/40 hover:shadow-md hover:text-techblue-deep">
+                            <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884 10 9.882l7.997-3.998A2 2 0 0 0 16 4H4a2 2 0 0 0-1.997 1.884z"/><path d="m18 8.118-8 4-8-4V14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.118z"/></svg>
+                            Email
+                        </a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ============ 右栏：内容区（2/3） ============ -->
+            <div class="lg:col-span-2">
+
+                <!-- 精选项目 Featured Projects -->
+                <section>
+                    <div class="mb-5 flex items-baseline justify-between">
+                        <h2 class="text-xl font-bold tracking-tight text-slate-900">精选项目 <span class="ml-1 text-sm font-normal text-slate-400">Featured Projects</span></h2>
+                        <a href="/post/" class="text-sm font-medium text-techblue-deep transition-colors hover:text-techblue-light">查看全部 →</a>
+                    </div>
+
+                    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                        <!-- 卡片 1：RDMA 监控系统 -->
+                        <a href="/post/rdma-monitoring-1/" class="group rounded-xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
+                            <h3 class="text-[15px] font-bold text-slate-900 group-hover:text-techblue-deep">RDMA 网络监控系统</h3>
+                            <p class="mt-2 text-[13px] leading-relaxed text-slate-500">eBPF 内核级追踪 + Prometheus 指标化 + Grafana 可视化，压测带宽稳定 1100 MB/s，容器化后在 K8s 验证。</p>
+                            <div class="mt-3 flex flex-wrap gap-1.5">
+                                <span class="rounded-full bg-techblue-pale px-2 py-0.5 text-[11px] font-medium text-techblue-deep">eBPF</span>
+                                <span class="rounded-full bg-techblue-pale px-2 py-0.5 text-[11px] font-medium text-techblue-deep">RDMA</span>
+                                <span class="rounded-full bg-techblue-pale px-2 py-0.5 text-[11px] font-medium text-techblue-deep">Grafana</span>
+                                <span class="rounded-full bg-techblue-pale px-2 py-0.5 text-[11px] font-medium text-techblue-deep">K8s</span>
+                            </div>
+                        </a>
+
+                        <!-- 卡片 2：K8s 部署 -->
+                        <a href="/post/k8s-nintendo-platform/" class="group rounded-xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
+                            <h3 class="text-[15px] font-bold text-slate-900 group-hover:text-techblue-deep">Kubernetes 容器化部署</h3>
+                            <p class="mt-2 text-[13px] leading-relaxed text-slate-500">Minikube 单节点集群，电商应用全容器化；模拟 Pod 故障、网络中断演练，沉淀标准排障流程。</p>
+                            <div class="mt-3 flex flex-wrap gap-1.5">
+                                <span class="rounded-full bg-techblue-pale px-2 py-0.5 text-[11px] font-medium text-techblue-deep">Kubernetes</span>
+                                <span class="rounded-full bg-techblue-pale px-2 py-0.5 text-[11px] font-medium text-techblue-deep">Docker</span>
+                                <span class="rounded-full bg-techblue-pale px-2 py-0.5 text-[11px] font-medium text-techblue-deep">Minikube</span>
+                                <span class="rounded-full bg-techblue-pale px-2 py-0.5 text-[11px] font-medium text-techblue-deep">DevOps</span>
+                            </div>
+                        </a>
+
+                        <!-- 卡片 3：GPU 算力交付 -->
+                        <a href="/about/" class="group rounded-xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
+                            <h3 class="text-[15px] font-bold text-slate-900 group-hover:text-techblue-deep">GPU 算力集群交付</h3>
+                            <p class="mt-2 text-[13px] leading-relaxed text-slate-500">20 台 H20 GPU 服务器改配：NVMe / CX6 网卡 / RAID 更换，NVIDIA Field Diagnostic 压测定位兼容性故障。</p>
+                            <div class="mt-3 flex flex-wrap gap-1.5">
+                                <span class="rounded-full bg-techblue-pale px-2 py-0.5 text-[11px] font-medium text-techblue-deep">GPU</span>
+                                <span class="rounded-full bg-techblue-pale px-2 py-0.5 text-[11px] font-medium text-techblue-deep">NVIDIA</span>
+                                <span class="rounded-full bg-techblue-pale px-2 py-0.5 text-[11px] font-medium text-techblue-deep">Dell PowerEdge</span>
+                                <span class="rounded-full bg-techblue-pale px-2 py-0.5 text-[11px] font-medium text-techblue-deep">RAID</span>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- 最新文章 Latest Posts -->
+                <section class="mt-12">
+                    <div class="mb-5 flex items-baseline justify-between">
+                        <h2 class="text-xl font-bold tracking-tight text-slate-900">最新文章 <span class="ml-1 text-sm font-normal text-slate-400">Latest Posts</span></h2>
+                        <a href="/post/" class="text-sm font-medium text-techblue-deep transition-colors hover:text-techblue-light">全部文章 →</a>
+                    </div>
+
+                    <div class="overflow-hidden rounded-xl border border-slate-200/80 bg-white shadow-sm">
+                        {{ $recent := first 3 .Site.RegularPages }}
+                        {{ range $i, $p := $recent }}
+                        <a href="{{ $p.RelPermalink }}"
+                           class="group flex items-center justify-between gap-4 border-slate-200/60 px-6 py-4 transition-colors hover:bg-slate-50 {{ if ne $i 2 }}border-b{{ end }}">
+                            <span class="text-[14.5px] font-semibold text-slate-800 transition-colors group-hover:text-techblue-deep">{{ $p.Title }}</span>
+                            <span class="shrink-0 text-[13px] tabular-nums text-slate-400">{{ $p.Date.Format "2006-01-02" }}</span>
+                        </a>
+                        {{ end }}
+                    </div>
+                </section>
+
+                <!-- 一句话定位 -->
+                <section class="mt-12 rounded-xl border border-slate-200/80 bg-white p-6 shadow-sm">
+                    <p class="text-[14px] leading-relaxed text-slate-600">这里是个人作品集——项目记录、学习笔记与课程报告。中文为主、配英文摘要，展示我<strong class="font-semibold text-slate-800">做过什么、能做什么、怎么思考问题</strong>。</p>
+                </section>
+
             </div>
         </div>
-
-        <!-- 姓名 -->
-        <h1 class="text-center text-4xl font-bold tracking-tight text-slate-900 sm:text-[2.6rem]">
-            刘峻宇 <span class="font-normal text-slate-300">·</span> <span class="text-techblue-deep">Liu Junyu</span>
-        </h1>
-
-        <!-- 技术标签 Pills -->
-        <div class="mt-7 flex flex-wrap justify-center gap-2">
-            <span class="rounded-full bg-slate-200/70 px-3.5 py-1 text-[13px] font-medium text-slate-600">Network Engineering</span>
-            <span class="rounded-full bg-slate-200/70 px-3.5 py-1 text-[13px] font-medium text-slate-600">GPU Infrastructure</span>
-            <span class="rounded-full bg-slate-200/70 px-3.5 py-1 text-[13px] font-medium text-slate-600">Networking</span>
-            <span class="rounded-full bg-slate-200/70 px-3.5 py-1 text-[13px] font-medium text-slate-600">Systems</span>
-        </div>
-
-        <!-- 中英双语简介 -->
-        <div class="mt-10 space-y-5 text-center">
-            <p class="text-[15.5px] leading-relaxed text-slate-800">你好，我是<strong class="font-semibold text-slate-900">刘峻宇</strong>，网络工程专业本科毕业，base 深圳。专注 <strong class="font-semibold text-slate-900">GPU 算力基础设施与网络系统</strong>，做过 GPU 集群交付、20 台 H20 算力硬件改配、eBPF + RDMA 高性能网络研究。这里是个人作品集——项目记录、学习笔记与课程报告都在 <strong class="font-semibold text-slate-900">博客 Blog</strong> 栏。</p>
-            <p class="text-[15.5px] leading-relaxed text-slate-500">Hi, I'm Liu Junyu, a Network Engineering graduate based in Shenzhen, focused on GPU infrastructure, networking and systems. My work includes GPU cluster delivery, large-scale hardware reconfiguration, and eBPF + RDMA research. This is my portfolio — projects and notes live under <strong class="font-semibold text-slate-600">Blog</strong>.</p>
-        </div>
-
-        <!-- 按钮 CTA -->
-        <div class="mt-12 flex flex-wrap justify-center gap-4">
-            <a href="/post/"
-               class="rounded-lg bg-techblue-deep px-7 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-techblue-deep/25">
-                浏览项目 · View Projects
-            </a>
-            <a href="/about/"
-               class="rounded-lg border border-slate-300 bg-white px-7 py-3 text-sm font-semibold text-slate-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-techblue-deep/40 hover:shadow-md hover:text-techblue-deep">
-                关于我 · About
-            </a>
-        </div>
-
     </main>
 </div>
 {{ end }}
