@@ -1,8 +1,14 @@
 ---
-title: "用 Django 搭出「天天生鲜」电商站：从 MTV 模型到购物车结算"
-date: 2026-10-28
-categories: ["项目日志"]
-tags: ["Django", "Python", "MySQL", "URL路由", "模板渲染"]
+title: 用 Django 搭出「天天生鲜」电商站：从 MTV 模型到购物车结算
+date: 2026-10-28T22:05:00.000+08:00
+categories:
+  - 项目日志
+tags:
+  - Django
+  - Python
+  - MySQL
+  - URL路由
+  - 模板渲染
 ---
 
 > I built a "Tiantian Fresh" e-commerce site on Django with MySQL: product listing, category pages, product detail, a live cart with price totaling, an order flow, plus a separate admin backend for managing products and users. This post covers the MTV layout, model definitions, routing and the two most confusing beginner pitfalls — 404 page-not-found and data that never renders to the template.
