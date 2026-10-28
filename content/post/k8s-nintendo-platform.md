@@ -9,7 +9,7 @@ tags: ["Kubernetes", "Docker", "Minikube", "DevOps", "Nginx"]
 
 ## 一、前言：单机虚拟机也能玩容器编排
 
-一说 Kubernetes，很多人第一反应是"几十台服务器的集群"。但对学习者来说，根本不需要真集群——一台本地虚拟机上的 **Minikube 单节点集群**，就足够把 Deployment、Service、滚动更新、回滚这些核心概念完整跑一遍。
+一说 Kubernetes，很多人第一反应是"几十台服务器的集群"。但对学习者来说，根本不需要真集群，一台本地虚拟机上的 **Minikube 单节点集群**，就足够把 Deployment、Service、滚动更新、回滚这些核心概念完整跑一遍。
 
 我这次拿一个任天堂风格的游戏网页平台当"被部署对象"，目的不是做网站本身，而是走通**一条容器化部署的标准流水线**：写 Dockerfile → 构建镜像 → 推私有仓库 → 写 Deployment YAML → `kubectl apply` → 暴露 Service → 滚动更新/回滚 → 排障。下面按实际操作顺序复盘。
 
@@ -55,7 +55,7 @@ docker tag game:v1.0 crpi-xxx.personal.cr.aliyuncs.com/lb2832/game:v1.0
 docker push crpi-xxx.personal.cr.aliyuncs.com/lb2832/game:v1.0
 ```
 
-私有仓库要拉镜像得先有凭证，用 `kubectl create secret docker-registry` 把仓库账号配成 imagePullSecret——**注意这一步必须在 Minikube 处于运行状态时做**，否则会直接报错。
+私有仓库要拉镜像得先有凭证，用 `kubectl create secret docker-registry` 把仓库账号配成 imagePullSecret：**注意这一步必须在 Minikube 处于运行状态时做**，否则会直接报错。
 
 **Step 2：用 Deployment 描述整个工作负载**
 
@@ -129,7 +129,7 @@ kubectl describe deployment game-app # 看详细配置、事件
 kubectl logs <pod-name>              # 看单个 Pod 日志
 ```
 
-`describe` 出来的结果很说明问题——3 个副本全部 desired/updated/available，滚动更新策略、资源上下限、健康检查都清清楚楚：
+`describe` 出来的结果很说明问题：3 个副本全部 desired/updated/available，滚动更新策略、资源上下限、健康检查都清清楚楚：
 
 ![kubectl describe deployment 输出](/images/k8s-nintendo-describe.png)
 
@@ -156,7 +156,7 @@ kubectl rollout undo deployment/game-app
 
 **坑 1：Minikube 起不来 / 镜像拉取失败**
 
-现象：`minikube start` 卡住或报拉取镜像超时。原因是默认从 Google 的镜像仓库拉组件，网络不通。解决就是开头那条命令——启动时用 `--image-mirror-country=cn` + `--image-repository` 把组件镜像指向阿里云。
+现象：`minikube start` 卡住或报拉取镜像超时。原因是默认从 Google 的镜像仓库拉组件，网络不通。解决就是开头那条命令，启动时用 `--image-mirror-country=cn` + `--image-repository` 把组件镜像指向阿里云。
 
 **坑 2：Docker 构建镜像也拉不动基础镜像**
 
@@ -175,13 +175,13 @@ sudo systemctl restart docker
 
 *在"软件和更新"里把下载自换成华为云镜像，安装工具不再频频失败*
 
-**坑 4：故意制造的故障——镜像写错版本**
+**坑 4：故意制造的故障，镜像写错版本**
 
 把镜像改成一个不存在的版本号，Pod 立刻进入 `CrashLoopBackOff`。排障套路很固定：`kubectl describe pod` 看 Events，一眼能看到 `ImagePullBackOff` / `ErrImagePull`，确认是镜像问题后，`kubectl rollout undo` 回 v1.0 或直接把镜像改回正确版本即恢复。
 
 ## 六、资源调参与小结
 
-除了换镜像，还练了资源配额调整：最初把内存 limit 设成 512Mi，遇到资源吃紧就改成 1Gi，改完等一会儿再看 Pod 状态才会生效——**改配置后不要立刻下结论，给控制器一点 reconcile 的时间**。
+除了换镜像，还练了资源配额调整：最初把内存 limit 设成 512Mi，遇到资源吃紧就改成 1Gi，改完等一会儿再看 Pod 状态才会生效：**改配置后不要立刻下结论，给控制器一点 reconcile 的时间**。
 
 | 操作 | 命令/动作 | 结果 |
 |---|---|---|

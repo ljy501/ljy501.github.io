@@ -66,7 +66,7 @@ curl 'http://127.0.0.1:9090/api/v1/query?query=rdma_rxe_create_cq_total'
 
 ## 四、容器化验证：把压测负载塞进 Docker
 
-光在宿主机上跑通不算数——RDMA 在真实场景里是跑在容器里的。我构建了一个容器化 RDMA 测试负载：
+光在宿主机上跑通不算数，RDMA 在真实场景里是跑在容器里的。我构建了一个容器化 RDMA 测试负载：
 
 ```bash
 docker run --rm --network host --privileged \
@@ -93,7 +93,7 @@ docker run --rm --network host --privileged \
 
 **坑 2：`ib_send_bw` 报 mlock 相关错误**
 
-RDMA 需要锁定内存，容器默认的 memlock 限制会让压测直接失败。`--ulimit memlock=-1:-1 --cap-add IPC_LOCK` 就是干这个的——**先调 ulimit，再补 capabilities**，顺序反了照样报错。
+RDMA 需要锁定内存，容器默认的 memlock 限制会让压测直接失败。`--ulimit memlock=-1:-1 --cap-add IPC_LOCK` 就是干这个的：**先调 ulimit，再补 capabilities**，顺序反了照样报错。
 
 ## 六、测试结果：数据说话
 
@@ -108,7 +108,7 @@ perftest 三件套 × 4 种消息大小（64B ~ 65536B），RC 连接：
 | 4096B | 768.34 | 561.98 | 704.26 |
 | 65536B | **1080.57** | 710.26 | **1036.89** |
 
-结论：**消息越大带宽越高**（固定开销被摊薄），Write 和 Send 性能接近，Read 因软件路径开销偏弱——SoftRoCE 环境下的正常现象。
+结论：**消息越大带宽越高**（固定开销被摊薄），Write 和 Send 性能接近，Read 因软件路径开销偏弱，SoftRoCE 环境下的正常现象。
 
 ### eBPF 采集有效性（三轮压测）
 
@@ -118,7 +118,7 @@ perftest 三件套 × 4 种消息大小（64B ~ 65536B），RC 连接：
 | 2 | 8 | 12 | +4 | 12 | 1100.98 MB/s |
 | 3 | 12 | 16 | +4 | 16 | 1103.99 MB/s |
 
-三轮增量稳定、Prometheus 与 exporter 完全一致——**eBPF 真的"看见"了 RDMA 通信，不是纸面指标**。
+三轮增量稳定、Prometheus 与 exporter 完全一致：**eBPF 真的"看见"了 RDMA 通信，不是纸面指标**。
 
 ### 容器化验证（最关键）
 
@@ -132,13 +132,13 @@ perftest 三件套 × 4 种消息大小（64B ~ 65536B），RC 连接：
 
 ![Docker 容器化 RDMA 负载监控验证结果](/images/bishi-docker-result.png)
 
-**容器里的 RDMA 压测，成功触发了宿主机的内核事件，并被整条 eBPF → Prometheus → Grafana 链路完整观测到**——这套方案在真实容器化场景下是可行的。
+**容器里的 RDMA 压测，成功触发了宿主机的内核事件，并被整条 eBPF → Prometheus → Grafana 链路完整观测到**，这套方案在真实容器化场景下是可行的。
 
 ## 七、总结与思考
 
 做完这个项目，最深的体会有三点：
 
-1. **"可观测性"的价值是打开黑盒**。以前监控就是"看 CPU 满了没"，这套链路看到的是**协议栈内部每一步发生了什么**——这个思维转变比技术本身更值钱。
+1. **"可观测性"的价值是打开黑盒**。以前监控就是"看 CPU 满了没"，这套链路看到的是**协议栈内部每一步发生了什么**，这个思维转变比技术本身更值钱。
 2. **三段链路，每一环都得口径一致**。事件计数 → 指标模型 → 面板展示，任何一环对不上，"监控了个寂寞"。
 3. **踩坑的过程就是成长**。memlock、设备挂载、capabilities，每一个坑都让我对 Linux 权限模型和内核设备管理理解更深。
 

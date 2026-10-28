@@ -32,30 +32,30 @@ tags: ["网络工程", "VLAN", "OSPF", "NAT", "ACL"]
 | 核心 Router1 | Fa1/0 | 10.1.2.101/24 | — |
 | 核心 Router1 | Se0/3/0 | 202.121.241.8/24 | — |
 | Router ISP | Se0/0/0 | 202.121.241.100/24 | — |
-| PC1（教学楼1）VLAN2 | — | 192.168.2.22/24 | 192.168.2.254 |
-| PC2（教学楼2）VLAN3 | — | 192.168.3.22/24 | 192.168.3.254 |
-| PC3（宿舍楼1）VLAN4 | — | 172.16.4.22/24 | 172.16.4.254 |
-| PC4（宿舍楼2）VLAN5 | — | 172.16.5.22/24 | 172.16.5.254 |
+| PC1（教学楼1）VLAN 2 | — | 192.168.2.22/24 | 192.168.2.254 |
+| PC2（教学楼2）VLAN 3 | — | 192.168.3.22/24 | 192.168.3.254 |
+| PC3（宿舍楼1）VLAN 4 | — | 172.16.4.22/24 | 172.16.4.254 |
+| PC4（宿舍楼2）VLAN 5 | — | 172.16.5.22/24 | 172.16.5.254 |
 | Server-PT（数据中心） | Fa0 | 10.1.3.22/24 | — |
 
-一个铁律先记死：**和主机直连的三层接口/VLAN 虚接口 IP，必须和主机网关一致**，否则二层再通也 ping 不通——这个坑后面还会踩一次。
+一个铁律先记死：**和主机直连的三层接口/VLAN 虚接口 IP，必须和主机网关一致**，否则二层再通也 ping 不通，这个坑后面还会踩一次。
 
-## 三、Step 1：分区配置——教学区走单臂路由，宿舍区走三层交换机
+## 三、Step 1：分区配置，教学区走单臂路由，宿舍区走三层交换机
 
 两个区域用了不同的 VLAN 间路由方案，正好对比着看。
 
-**教学区用单臂路由**：二层交换机起 VLAN2、VLAN3 并把端口划进去，上联口设 trunk；路由器 Router2 的 Fa0/1 不开物理 IP，而是开两个子接口，用 802.1Q 打标签封装：
+**教学区用单臂路由**：二层交换机起 VLAN 2、VLAN 3 并把端口划进去，上联口设 trunk；路由器 Router2 的 Fa0/1 不开物理 IP，而是开两个子接口，用 802.1Q 打标签封装：
 
 ```text
 Router2(config)# interface fa0/1.1
-Router2(config-subif)# encapsulation dot1Q 2      ! 封装 VLAN2
+Router2(config-subif)# encapsulation dot1Q 2      ! 封装 VLAN 2
 Router2(config-subif)# ip address 192.168.2.254 255.255.255.0
 Router2(config-subif)# interface fa0/1.2
-Router2(config-subif)# encapsulation dot1Q 3      ! 封装 VLAN3
+Router2(config-subif)# encapsulation dot1Q 3      ! 封装 VLAN 3
 Router2(config-subif)# ip address 192.168.3.254 255.255.255.0
 ```
 
-**宿舍区用三层交换机**：二层交换机起 VLAN4/VLAN5，三层交换机上给 SVI 配 IP，上联口设 trunk。三层接口要先 `no switchport` 才能配 IP：
+**宿舍区用三层交换机**：二层交换机起 VLAN 4/VLAN 5，三层交换机上给 SVI 配 IP，上联口设 trunk。三层接口要先 `no switchport` 才能配 IP：
 
 ```text
 ! 三层交换机上把物理口转为三层路由口后，当路由器用
@@ -80,7 +80,7 @@ Router1(config-router)# network 10.1.2.0 0.0.0.255 area 0
 Router1(config-router)# network 202.121.241.0 0.0.0.255 area 0
 ```
 
-注意 OSPF 的 network 后面跟的是**反掩码（wildcard）**，不是子网掩码——`0.0.0.255` 而不是 `255.255.255.0`。配完看日志刷出 `%OSPF-5-ADJCHG: ... Neighbor ... on FastEthernet0/1 from LOADING to FULL`，邻居关系才真正建起来。特权模式下 `show ip route` 能看到 O 开头的路由，此时全网 PC 和 server 全部互通。
+注意 OSPF 的 network 后面跟的是**反掩码（wildcard）**，不是子网掩码，`0.0.0.255` 而不是 `255.255.255.0`。配完看日志刷出 `%OSPF-5-ADJCHG: ... Neighbor ... on FastEthernet0/1 from LOADING to FULL`，邻居关系才真正建起来。特权模式下 `show ip route` 能看到 O 开头的路由，此时全网 PC 和 server 全部互通。
 
 ## 五、Step 3：动态 NAT 让宿舍区共享公网出口
 
@@ -105,7 +105,7 @@ interface se0/3/0
 
 `overload` 是灵魂：没有它，公网池里 8 个 IP 是一对一占坑，占满就得排队；开了 overload，一个公网 IP 靠不同端口号能同时塞下一堆私网会话，省地址。配完用 `show ip nat translations` 看转换表，`inside global` 是转换后的公网[IP:端口]，`inside local` 是转换前的私网[IP:端口]。
 
-## 六、Step 4：ACL 防火墙——宿舍楼到数据中心一律拦死
+## 六、Step 4：ACL 防火墙，宿舍楼到数据中心一律拦死
 
 先拦"宿舍楼不许碰数据中心"。在核心路由器连数据中心的 Fa1/0 出口方向挂标准 ACL：
 
@@ -130,7 +130,7 @@ interface f1/0
  ip access-group 101 out
 ```
 
-验证效果非常直观：教学楼 PC2 用浏览器开 `http://10.1.3.22` 正常出页面；而同一份服务器，宿舍区 PC4 开就是 `Request Timeout`。但 PC2 ping 服务器依然不通——因为扩展 ACL 只放行了 TCP 的 www/ftp，ICMP 没在放行列表里：
+验证效果非常直观：教学楼 PC2 用浏览器开 `http://10.1.3.22` 正常出页面；而同一份服务器，宿舍区 PC4 开就是 `Request Timeout`。但 PC2 ping 服务器依然不通，因为扩展 ACL 只放行了 TCP 的 www/ftp，ICMP 没在放行列表里：
 
 ![左右两个 Web Browser 对比：左侧教学楼 PC2 正常打开 10.1.3.22 网页，右侧宿舍区 PC4 访问同一地址 Request Timeout](/images/netlab-acl-web-test.png)
 
@@ -142,7 +142,7 @@ interface f1/0
 
 **坑 2：ACL 只写 deny 不写 permit any，全网都断了**
 
-标准 ACL 默认末尾是隐式 `deny any`。第一版只写了 `deny 172.16.0.0/16`，结果教学区也跟着访问不了数据中心——因为没写 `permit any`，剩下的流量全被隐式规则吞了。打完 deny 一定补 `permit any`。
+标准 ACL 默认末尾是隐式 `deny any`。第一版只写了 `deny 172.16.0.0/16`，结果教学区也跟着访问不了数据中心，因为没写 `permit any`，剩下的流量全被隐式规则吞了。打完 deny 一定补 `permit any`。
 
 **坑 3：忘了 overload，公网 IP 占满就上不了网**
 
@@ -157,7 +157,7 @@ interface f1/0
 3. **出口控制**：动态 NAT + overload 做宿舍区的公网地址复用；
 4. **访问策略**：标准 ACL 拦宿舍区→数据中心，扩展 ACL 只放教学区→服务器的 www/ftp。
 
-网络实验最爽的一点就是**策略对错立刻能被 ping 和浏览器证伪**——通了就是通了，不通就是不通，没有模糊地带。真要再往深做，我会把这套手工命令重写成脚本模板，再加上 OSPF 多 area 设计，把单骨干网扩成层次化架构。
+网络实验最爽的一点就是**策略对错立刻能被 ping 和浏览器证伪**，通了就是通了，不通就是不通，没有模糊地带。真要再往深做，我会把这套手工命令重写成脚本模板，再加上 OSPF 多 area 设计，把单骨干网扩成层次化架构。
 
 ---
 
