@@ -1,11 +1,122 @@
-{{ define "main" }}
-    {{ if .Content }}
-        <section class="home-profile">
-            {{ .Content }}
-        </section>
-    {{ end }}
+{{ define "head" }}
+<script>
+    tailwind.config = {
+        corePlugins: { preflight: false },
+        theme: {
+            extend: {
+                colors: {
+                    techblue: {
+                        DEFAULT: '#1d4ed8',
+                        deep: '#1e3a8a',
+                        light: '#3b82f6',
+                        pale: '#dbeafe'
+                    }
+                }
+            }
+        }
+    }
+</script>
+<style>
+    @keyframes breathe {
+        0%, 100% { box-shadow: 0 0 16px 2px rgba(59, 130, 246, .30), 0 0 0 0 rgba(59, 130, 246, .08); }
+        50%      { box-shadow: 0 0 30px 8px rgba(59, 130, 246, .50), 0 0 70px 20px rgba(59, 130, 246, .16); }
+    }
+    .avatar-breathe { animation: breathe 3.2s ease-in-out infinite; }
+    /* 首页隐藏主题侧边栏，使用顶部导航布局 */
+    body.home-no-sidebar .left-sidebar { display: none !important; }
+    body.home-no-sidebar .main-container { justify-content: center; }
+</style>
 {{ end }}
 
-{{ define "right-sidebar" }}
-    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ define "body-class" }}home-no-sidebar{{ end }}
+
+{{ define "left-sidebar" }}{{ end }}
+{{ define "right-sidebar" }}{{ end }}
+
+{{ define "main" }}
+<div class="min-h-screen bg-[#faf9f7] text-slate-800"
+     style="margin: calc(-1 * var(--container-padding)); padding: 0 var(--container-padding);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;">
+
+    <!-- 顶部导航栏 Top Navbar -->
+    <nav class="sticky top-0 z-50 border-b border-slate-200/70 bg-[#faf9f7]/85 backdrop-blur">
+        <div class="mx-auto flex max-w-3xl items-center justify-between px-5 py-4">
+            <a href="/" class="flex items-center gap-2.5 font-bold tracking-tight text-slate-900">
+                <span class="grid h-8 w-8 place-items-center rounded-lg bg-techblue-deep text-[13px] font-black text-white">LJ</span>
+                Liu Junyu's Blog
+            </a>
+            <div class="hidden items-center gap-5 text-sm font-medium text-slate-500 sm:flex">
+                <a href="/" class="transition-colors hover:text-techblue-deep">首页 <span class="text-slate-300">Home</span></a>
+                <a href="/about/" class="transition-colors hover:text-techblue-deep">关于 <span class="text-slate-300">About</span></a>
+                <a href="/post/" class="transition-colors hover:text-techblue-deep">博客 <span class="text-slate-300">Blog</span></a>
+                <a href="/contact/" class="transition-colors hover:text-techblue-deep">联系 <span class="text-slate-300">Contact</span></a>
+            </div>
+            <div class="flex items-center gap-4 text-sm font-medium text-slate-500 sm:hidden">
+                <a href="/post/" class="transition-colors hover:text-techblue-deep">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主体内容 Hero -->
+    <main class="mx-auto max-w-3xl px-5 pb-28 pt-16 sm:pt-20">
+
+        <!-- 像素风头像 + 呼吸灯 -->
+        <div class="mb-9 flex justify-center">
+            <div class="avatar-breathe rounded-2xl bg-white p-3 ring-1 ring-slate-200/80">
+                <svg viewBox="0 0 16 16" width="112" height="112" style="image-rendering: pixelated;" role="img" aria-label="Liu Junyu pixel avatar">
+                    <rect x="0" y="0" width="16" height="16" fill="#1e3a8a"/>
+                    <!-- 背景光点 -->
+                    <rect x="2" y="2" width="1" height="1" fill="#3b82f6" opacity="0.5"/>
+                    <rect x="13" y="3" width="1" height="1" fill="#3b82f6" opacity="0.4"/>
+                    <rect x="1" y="12" width="1" height="1" fill="#3b82f6" opacity="0.35"/>
+                    <rect x="13" y="11" width="1" height="1" fill="#93c5fd" opacity="0.5"/>
+                    <!-- L：竖 x=3 y=4-10；顶横 x=4,5 y=4；底横 x=4,5 y=10 -->
+                    <rect x="3" y="4" width="1" height="7" fill="#93c5fd"/>
+                    <rect x="4" y="4" width="2" height="1" fill="#93c5fd"/>
+                    <rect x="4" y="10" width="2" height="1" fill="#93c5fd"/>
+                    <!-- J：顶横 x=9-11 y=4；竖 x=11 y=5-8；勾 x=10 y=9；底横 x=9,10 y=10 -->
+                    <rect x="9" y="4" width="3" height="1" fill="#93c5fd"/>
+                    <rect x="11" y="5" width="1" height="4" fill="#93c5fd"/>
+                    <rect x="10" y="9" width="1" height="1" fill="#93c5fd"/>
+                    <rect x="9" y="10" width="2" height="1" fill="#93c5fd"/>
+                    <!-- 高光像素 -->
+                    <rect x="3" y="4" width="1" height="1" fill="#bfdbfe"/>
+                    <rect x="9" y="4" width="1" height="1" fill="#bfdbfe"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- 姓名 -->
+        <h1 class="text-center text-4xl font-bold tracking-tight text-slate-900 sm:text-[2.6rem]">
+            刘峻宇 <span class="font-normal text-slate-300">·</span> <span class="text-techblue-deep">Liu Junyu</span>
+        </h1>
+
+        <!-- 技术标签 Pills -->
+        <div class="mt-7 flex flex-wrap justify-center gap-2">
+            <span class="rounded-full bg-slate-200/70 px-3.5 py-1 text-[13px] font-medium text-slate-600">Network Engineering</span>
+            <span class="rounded-full bg-slate-200/70 px-3.5 py-1 text-[13px] font-medium text-slate-600">GPU Infrastructure</span>
+            <span class="rounded-full bg-slate-200/70 px-3.5 py-1 text-[13px] font-medium text-slate-600">Networking</span>
+            <span class="rounded-full bg-slate-200/70 px-3.5 py-1 text-[13px] font-medium text-slate-600">Systems</span>
+        </div>
+
+        <!-- 中英双语简介 -->
+        <div class="mt-10 space-y-5 text-center">
+            <p class="text-[15.5px] leading-relaxed text-slate-800">你好，我是<strong class="font-semibold text-slate-900">刘峻宇</strong>，网络工程专业本科毕业，base 深圳。专注 <strong class="font-semibold text-slate-900">GPU 算力基础设施与网络系统</strong>，做过 GPU 集群交付、20 台 H20 算力硬件改配、eBPF + RDMA 高性能网络研究。这里是个人作品集——项目记录、学习笔记与课程报告都在 <strong class="font-semibold text-slate-900">博客 Blog</strong> 栏。</p>
+            <p class="text-[15.5px] leading-relaxed text-slate-500">Hi, I'm Liu Junyu, a Network Engineering graduate based in Shenzhen, focused on GPU infrastructure, networking and systems. My work includes GPU cluster delivery, large-scale hardware reconfiguration, and eBPF + RDMA research. This is my portfolio — projects and notes live under <strong class="font-semibold text-slate-600">Blog</strong>.</p>
+        </div>
+
+        <!-- 按钮 CTA -->
+        <div class="mt-12 flex flex-wrap justify-center gap-4">
+            <a href="/post/"
+               class="rounded-lg bg-techblue-deep px-7 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-techblue-deep/25">
+                浏览项目 · View Projects
+            </a>
+            <a href="/about/"
+               class="rounded-lg border border-slate-300 bg-white px-7 py-3 text-sm font-semibold text-slate-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-techblue-deep/40 hover:shadow-md hover:text-techblue-deep">
+                关于我 · About
+            </a>
+        </div>
+
+    </main>
+</div>
 {{ end }}

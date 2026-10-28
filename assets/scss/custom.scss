@@ -1,16 +1,69 @@
-/* ========== 自定义样式：蓝色渐变背景 ========== */
+/* ========== 全站统一：米白背景 + 深蓝主色 + 顶部导航 ========== */
 
-/* 浅色模式：柔和蓝白渐变 */
-html[data-scheme="light"] body {
-    background: linear-gradient(160deg, #f6f9ff 0%, #e9f1fd 45%, #dce8fb 100%) fixed;
+/* 主色调统一为 Tech Blue（深蓝） */
+html[data-scheme="light"] {
+    --accent-color: #1e3a8a;
+    --accent-color-darker: #172554;
 }
 
-/* 深色模式：深蓝科技感渐变 */
+/* 浅色模式：极简米白 */
+html[data-scheme="light"] body {
+    background: #faf9f7 fixed;
+}
+
+/* 深色模式：深蓝科技感 */
 html[data-scheme="dark"] body {
     background: linear-gradient(160deg, #0a0f1f 0%, #0d1530 45%, #131c3d 100%) fixed;
 }
 
-/* 文章卡片在渐变背景上的柔和投影 */
+/* 顶部导航栏 */
+.top-nav {
+    background: rgba(250, 249, 247, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-color: rgba(226, 232, 240, 0.7);
+}
+html[data-scheme="dark"] .top-nav {
+    background: rgba(10, 15, 31, 0.85);
+    border-color: rgba(51, 65, 85, 0.5);
+}
+.top-nav-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #1e3a8a;
+    color: #fff;
+    display: inline-grid;
+    place-items: center;
+    font-weight: 900;
+    font-size: 13px;
+    flex: none;
+}
+.top-nav-brand {
+    color: #0f172a;
+    font-size: 1.02rem;
+    letter-spacing: -0.01em;
+}
+html[data-scheme="dark"] .top-nav-brand {
+    color: #e2e8f0;
+}
+.top-nav-item {
+    font-size: 14px;
+    color: #64748b;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+.top-nav-item:hover {
+    color: #1e3a8a;
+}
+html[data-scheme="dark"] .top-nav-item {
+    color: #94a3b8;
+}
+html[data-scheme="dark"] .top-nav-item:hover {
+    color: #93c5fd;
+}
+
+/* 文章卡片在米白背景上的柔和投影 */
 html[data-scheme="light"] .article-list .article-card,
 html[data-scheme="light"] .article-list .card-variant {
     box-shadow: 0 4px 18px rgba(31, 64, 130, 0.08);

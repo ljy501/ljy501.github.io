@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Locale }}" dir="{{ default `ltr` .Language.Direction }}">
+    <head>
+        {{- partial "head/head.html" . -}}
+        {{- block "head" . -}}{{ end }}
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                corePlugins: { preflight: false },
+                theme: {
+                    extend: {
+                        colors: {
+                            techblue: {
+                                DEFAULT: '#1d4ed8',
+                                deep: '#1e3a8a',
+                                light: '#3b82f6',
+                                pale: '#dbeafe'
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body class="{{ block `body-class` . }}{{ end }}">
+        {{- partial "head/colorScheme" . -}}
+
+        {{ if not .IsHome }}
+        <nav class="top-nav sticky top-0 z-50 border-b">
+            <div class="mx-auto flex max-w-3xl items-center justify-between px-5 py-4">
+                <a href="/" class="flex items-center gap-2.5 font-bold top-nav-brand">
+                    <span class="top-nav-logo">LJ</span>
+                    <span>Liu Junyu's Blog</span>
+                </a>
+                <div class="flex items-center gap-5 top-nav-menu">
+                    {{ range .Site.Menus.main }}
+                    <a href="{{ .URL }}" class="top-nav-item">{{ .Name }}</a>
+                    {{ end }}
+                </div>
+            </div>
+        </nav>
+        {{ end }}
+
+        <div class="container main-container flex on-phone--column compact">
+            <main class="main full-width">
+                {{- block "main" . }}{{- end }}
+            </main>
+        </div>
+        {{ partial "footer/include.html" . }}
+    </body>
+</html>
